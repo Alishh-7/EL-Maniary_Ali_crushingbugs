@@ -5,17 +5,18 @@ const theButtons = document.querySelectorAll("#buttonHolder img");
 const puzzleBoard = document.querySelector(".puzzle-board");
 const puzzlePieces = document.querySelectorAll(".puzzle-pieces img");
 const dropZones = document.querySelectorAll(".drop-zone");
+// Selecting the container for puzzle pieces.
+const puzzlePieceDiv7 = document.querySelector(".puzzle-pieces");
 let draggedPiece;
 
-//functions
-function changeBGImage(event) {
-    //console.log("changeBGimage called");
-    //Method 1
-    //console.log(this.id);
-    //background-image: url('../images/backGround0.jpg');
-    // puzzleBoard.style.backgroundImage = `url('./images/backGround${this.id}.jpg')`;
+console.log(theButtons);
+console.log(puzzleBoard);
 
-    //Method 2
+//functions
+
+function changeBGImage(event) {
+    console.log("changeBGimage called");
+    
     console.log(event.currentTarget.id);
     puzzleBoard.style.backgroundImage = `url('./images/backGround${event.currentTarget.id}.jpg')`;
 }
@@ -27,15 +28,25 @@ function handleStartDrag() {
 
 function handleOver(e) {
     e.preventDefault();
-    console.log("Dragged Over")
+    console.log("Dragged Over");
 }
 
-function handleDrop() {
+function handleDrop(e) {
+    e.preventDefault();
+    console.log("Dropped")
+
+//// here is the fix for the drop of the piece that already been dropped,cannot have another piece to drop in the same place//
+if(this.children.length > 0) {
+    console.log("Drop zone occupied");
+    return;
+}
+
     this.appendChild(draggedPiece);
 }
 
 //eventListeners
-theButtons.forEach(button => button.addEventListener("click", changeBGImage));
+
+theButtons.forEach(button =>  button.addEventListener("click", changeBGImage));
 
 puzzlePieces.forEach(piece => piece.addEventListener("dragstart", handleStartDrag));
 

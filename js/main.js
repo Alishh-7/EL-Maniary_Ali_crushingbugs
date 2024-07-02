@@ -11,6 +11,7 @@ const puzzlePieceDiv7 = document.querySelector(".puzzle-pieces");
 //adding the const resetbutton 
 const resetButton = document.getElementById("resetBut");
 let draggedPiece;
+let currentPuzzle = 0;
 
 console.log(theButtons);
 console.log(puzzleBoard);
@@ -33,6 +34,15 @@ function changeBGImage(event) {
    const pieceNames = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
      puzzlePieces.forEach((piece, index) => {
      piece.src = `./images/${pieceNames[index]}${puzzleId}.jpg`; });
+
+
+     resetPieces();
+
+     // This function resets the puzzle pieces by putting them back in their original places, ready for a new puzzle game.
+
+     function resetPieces() {
+        puzzlePieces.forEach(piece => document.querySelector('.puzzle-pieces').appendChild(piece));
+    }
 }
 
 function handleStartDrag() {
@@ -81,3 +91,6 @@ dropZones.forEach(zone => zone.addEventListener("drop", handleDrop));
 
 //here i put the reset button for solve in it by adding an eventlistener so anytime the reset button been clicked eveeything will go to default (how it was first)
 resetButton.addEventListener("click", reset);
+
+//When the resetButton is clicked, this code calls the resetPieces function, which resets the puzzle pieces to their original place.
+resetButton.addEventListener('click', resetPieces);

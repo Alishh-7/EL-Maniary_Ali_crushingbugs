@@ -19,6 +19,17 @@ function changeBGImage(event) {
     
     console.log(event.currentTarget.id);
     puzzleBoard.style.backgroundImage = `url('./images/backGround${event.currentTarget.id}.jpg')`;
+    const puzzleId = event.currentTarget.id; // i add this code for the id to the clicked thumbnail, so we know which puzzle to show once clicked.
+
+   // change the puzzle to match the background thumbnail  clicked 
+   puzzlePieces.forEach((piece, index)=> {
+    piece.src = `./images/puzzle${puzzleId}_piece${index + 1}.jpg`;
+   });
+
+   // adding the pieceNames and forEach  go through each puzzle piece and update on the image source based on the position and the thumbnail clicked
+   const pieceNames = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
+     puzzlePieces.forEach((piece, index) => {
+     piece.src = `./images/${pieceNames[index]}${puzzleId}.jpg`; });
 }
 
 function handleStartDrag() {

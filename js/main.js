@@ -7,6 +7,9 @@ const puzzlePieces = document.querySelectorAll(".puzzle-pieces img");
 const dropZones = document.querySelectorAll(".drop-zone");
 // Selecting the container for puzzle pieces.
 const puzzlePieceDiv7 = document.querySelector(".puzzle-pieces");
+
+//adding the const resetbutton 
+const resetButton = document.getElementById("resetBut");
 let draggedPiece;
 
 console.log(theButtons);
@@ -55,6 +58,16 @@ if(this.children.length > 0) {
     this.appendChild(draggedPiece);
 }
 
+function reset() {
+    console.log ("User reset the puzzle.");
+
+    // once the reset button clicked, all the pieces get back to default normal places where they were before putting.
+    puzzlePieces.forEach(piece => {
+        puzzlePieceDiv7.appendChild(piece);
+    });
+    
+}
+
 //eventListeners
 
 theButtons.forEach(button =>  button.addEventListener("click", changeBGImage));
@@ -64,3 +77,7 @@ puzzlePieces.forEach(piece => piece.addEventListener("dragstart", handleStartDra
 dropZones.forEach(zone => zone.addEventListener("dragover", handleOver));
 
 dropZones.forEach(zone => zone.addEventListener("drop", handleDrop));
+
+
+//here i put the reset button for solve in it by adding an eventlistener so anytime the reset button been clicked eveeything will go to default (how it was first)
+resetButton.addEventListener("click", reset);
